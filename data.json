@@ -1,0 +1,46 @@
+{
+  "entries": [
+    {
+      "id": "a1f3c2d",
+      "title": "Git：版本控制",
+      "date": "2026-11-04",
+      "summary": "學會 git init、status、add、commit、log，並建立 feature-branch 分支、合併回 main，最後用 git remote add 與 git push 推上 GitHub。",
+      "note": "過程中遇到 refspec 不符與 403 權限錯誤，才發現電腦登入的是另一個 GitHub 帳號。"
+    },
+    {
+      "id": "b72e90a",
+      "title": "HTML5：網頁結構",
+      "date": "2026-11-04",
+      "summary": "在 FreeCodeCamp 完成 Build a Cat Photo App 共 42 步，練習標題、段落、圖片、連結與表單等基本標籤。",
+      "note": "系統對標籤的寫法有固定要求，要仔細對照題目說明。"
+    },
+    {
+      "id": "c4d518e",
+      "title": "CSS：外觀設計",
+      "date": "2026-11-04",
+      "summary": "在 FreeCodeCamp 完成 Design a Greeting Card 共 27 步，學到偽類別與偽元素的用法。",
+      "note": "這個頁面的深色主題就是用 CSS 變數統一管理顏色。"
+    },
+    {
+      "id": "d09a7b3",
+      "title": "jQuery：簡化互動",
+      "date": "2026-11-04",
+      "summary": "學習選擇器、事件與效果，並完成 W3Schools jQuery Quiz，25 題答對 22 題。",
+      "note": "本頁的按鈕、展開收合與淡入效果都由 jQuery 完成。"
+    },
+    {
+      "id": "e5b3f61",
+      "title": "JSON：資料格式",
+      "date": "2026-11-05",
+      "summary": "了解 JSON 以鍵值對與陣列表示資料，是網頁與伺服器交換資料的常見格式。",
+      "note": "你現在看到的每一筆紀錄，都是從 data.json 讀進來的。"
+    },
+    {
+      "id": "f8c2a04",
+      "title": "Ajax：不重新整理就載入資料",
+      "date": "2026-11-05",
+      "summary": "使用 jQuery 的 $.getJSON 在背景向伺服器要資料，再把結果寫進頁面，整個頁面不需要重新載入。",
+      "note": "在本機要用 Live Server 開啟，直接點開 index.html 會因為瀏覽器限制而讀不到 JSON。"
+    }
+  ]
+}

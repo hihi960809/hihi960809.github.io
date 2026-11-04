@@ -1,0 +1,155 @@
+:root {
+  --bg: #14171f;
+  --surface: #1c2029;
+  --line: #2c3240;
+  --text: #e8e4da;
+  --muted: #9aa1b2;
+  --accent: #e3a857;
+  --accent-ink: #1a1305;
+  --link: #8db4dc;
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.75;
+  padding: 0 20px;
+}
+
+.top, main, footer {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.top { padding: 72px 0 32px; }
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.sub { margin: 8px 0 0; color: var(--muted); }
+.intro { margin: 24px 0 0; max-width: 34em; }
+
+h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+section {
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#load-btn, #about-btn {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 700;
+}
+
+#load-btn:hover:not(:disabled), #about-btn:hover { filter: brightness(1.08); }
+#load-btn:disabled { opacity: 0.45; cursor: default; }
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+#status { margin: 12px 0 0; color: var(--muted); min-height: 1.75em; }
+
+/* 學習紀錄：仿 git log 的時間線 */
+.log {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0 0 0 20px;
+  border-left: 2px solid var(--line);
+}
+
+.entry { margin: 0 0 12px; position: relative; }
+
+.entry::before {
+  content: "";
+  position: absolute;
+  left: -27px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+.entry-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.entry-head:hover { border-color: var(--accent); }
+.entry-head[aria-expanded="true"] { border-color: var(--accent); }
+
+.hash { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); }
+.title { font-weight: 700; }
+.date { font-size: 0.85rem; color: var(--muted); }
+
+.entry-body {
+  margin: 0;
+  padding: 12px 16px 4px;
+  border-left: 2px solid var(--accent);
+  margin-left: 8px;
+}
+
+.entry-body p { margin: 0 0 10px; max-width: 36em; }
+.note { color: var(--muted); font-size: 0.95rem; }
+
+#about { padding-top: 16px; }
+#about p { margin: 0 0 10px; max-width: 36em; }
+
+.links { list-style: none; padding: 0; margin: 0; display: flex; gap: 24px; flex-wrap: wrap; }
+.links a { color: var(--link); }
+.links a:hover { color: var(--accent); }
+
+footer {
+  padding: 32px 0 56px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .top { padding-top: 48px; }
+  .entry-head { grid-template-columns: 1fr auto; }
+  .hash { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

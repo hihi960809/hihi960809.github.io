@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我的學習紀錄 | Web 基本原理與技術</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header class="top">
+    <h1>你的名字</h1>
+    <p class="sub">輔仁大學 · 你的系級 · Web 基本原理與技術 Lab 2</p>
+    <p class="intro">這個頁面記錄我這次作業學到的東西。每一筆紀錄都像一次 commit，按下按鈕就能載入。</p>
+  </header>
+
+  <main>
+    <section id="log-section">
+      <h2>學習紀錄</h2>
+      <button id="load-btn" type="button">載入學習紀錄</button>
+      <p id="status" role="status"></p>
+      <ol id="log" class="log"></ol>
+    </section>
+
+    <section id="about-section">
+      <h2>關於我</h2>
+      <button id="about-btn" type="button" aria-expanded="false" aria-controls="about">顯示更多</button>
+      <div id="about" hidden>
+        <p>興趣：在這裡寫你的興趣。</p>
+        <p>學習心得：在這裡寫一兩句這次作業最大的收穫。</p>
+        <p>AI 使用心得：在這裡寫你怎麼用 AI，以及哪些地方需要自己驗證。</p>
+      </div>
+    </section>
+
+    <section id="links-section">
+      <h2>我的連結</h2>
+      <ul class="links">
+        <li><a href="https://github.com/hihi960809" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.freecodecamp.org/你的FCC帳號" target="_blank" rel="noopener">FreeCodeCamp</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>用 HTML5、CSS、jQuery 與 JSON 製作，部署於 GitHub Pages。</p>
+  </footer>
+
+  <script>
+    $(function () {
+      // Ajax + JSON：按下按鈕才從 data.json 讀資料
+      $("#load-btn").on("click", function () {
+        var $btn = $(this);
+        $btn.prop("disabled", true);
+        $("#status").text("載入中…");
+
+        $.getJSON("data.json")
+          .done(function (data) {
+            var $log = $("#log").empty();
+            $.each(data.entries, function (i, e) {
+              var $item = $("<li>").addClass("entry");
+              var $head = $("<button>")
+                .attr({ type: "button", "aria-expanded": "false" })
+                .addClass("entry-head")
+                .append($("<span>").addClass("hash").text(e.id))
+                .append($("<span>").addClass("title").text(e.title))
+                .append($("<span>").addClass("date").text(e.date));
+              var $body = $("<div>").addClass("entry-body").hide()
+                .append($("<p>").text(e.summary))
+                .append($("<p>").addClass("note").text(e.note));
+              $item.append($head, $body).hide();
+              $log.append($item);
+              // 逐筆淡入
+              $item.delay(i * 120).fadeIn(300);
+            });
+            $("#status").text("已載入 " + data.entries.length + " 筆紀錄，點擊任一筆可展開。");
+          })
+          .fail(function () {
+            $("#status").text("載入失敗：請確認 data.json 與 index.html 在同一個資料夾，並用 Live Server 或 GitHub Pages 開啟。");
+            $btn.prop("disabled", false);
+          });
+      });
+
+      // jQuery 事件委派：展開 / 收合單筆紀錄
+      $("#log").on("click", ".entry-head", function () {
+        var $head = $(this);
+        var open = $head.attr("aria-expanded") === "true";
+        $head.attr("aria-expanded", String(!open));
+        $head.next(".entry-body").slideToggle(200);
+      });
+
+      // jQuery 效果：顯示 / 隱藏自我介紹
+      $("#about-btn").on("click", function () {
+        var $btn = $(this);
+        var $about = $("#about");
+        if ($about.is(":hidden")) {
+          $about.prop("hidden", false).hide().fadeIn(300);
+          $btn.text("收起").attr("aria-expanded", "true");
+        } else {
+          $about.fadeOut(200, function () { $about.prop("hidden", true); });
+          $btn.text("顯示更多").attr("aria-expanded", "false");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
